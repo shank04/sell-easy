@@ -31,7 +31,7 @@ app.use(flash());
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost/new9_db');
+mongoose.connect('mongodb://127.0.0.1:27017/new9_db');
 
 var db = mongoose.connection;
 db.on('error',console.error.bind(console,'connection error'));
