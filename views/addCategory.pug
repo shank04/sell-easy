@@ -1,0 +1,20 @@
+extends ./index
+block title
+	title Add Category
+	
+block content
+
+	h2 Create Category
+	form(action="", method="POST")
+		div
+			if error
+				p.text-danger #{error.errors.name.message}
+				label(for="name") Name:
+				input(name="name" value=category.name class="form-control")
+				
+			else
+				label(for="name") Name:
+				input(name="name" class="form-control")
+		br
+		div
+			button(type="Submit" class="btn btn-warning btn-lg") Create new Category

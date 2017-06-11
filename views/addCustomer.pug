@@ -1,0 +1,107 @@
+extends ./index
+block title
+	title Add Customer
+	
+block content
+	div(class="s-12 l-6")
+		h2 Add Customer
+		form(action="", method="POST")
+			div
+				if error
+					if(error.errors.name)
+						p.text-danger #{error.errors.name.message}
+						label(for="name") Name:
+						input(name="name" value=(customer===undefined ? "" : customer.name) class="form-control")
+					else
+
+						label(for="name") Name:
+						input(name="name" value=(customer===undefined ? "" : customer.name) class="form-control")
+
+
+				else
+					label(for="name") Name:
+					input(name="name" value=(customer===undefined ? "" : customer.name) class="form-control")
+			br
+			fieldset
+				legend Address
+				div
+					if error
+						if(error.errors['address.houseNo'])
+							p.text-danger #{error.errors['address.houseNo'].message}
+							label(for="houseNo") House No:
+							input(name="houseNo" value=(customer===undefined ? "" : customer.address.houseNo) class="form-control")
+						else
+							label(for="houseNo") House No:
+							input(name="houseNo" value=(customer===undefined ? "" : customer.address.houseNo) class="form-control")
+	 
+
+					else
+						label(for="houseNo") House No:
+						input(name="houseNo" value=(customer===undefined ? "" : customer.address.houseNo) class="form-control")
+				br
+				div
+					if error
+						if(error.errors['address.street'])
+							p.text-danger #{error.errors['address.street'].message}
+							label(for="street") Street No :
+							input(name="street" value=(customer===undefined ? "" : customer.address.street) class="form-control")
+						else
+							label(for="street") Street No :
+							input(name="street" value=(customer===undefined ? "" : customer.address.street) class="form-control")
+	 
+
+					else
+						label(for="street") Street No :
+						input(name="street" value=(customer===undefined ? "" : customer.address.street) class="form-control")
+				br
+				div
+					if error
+						if(error.errors['address.district'])
+							p.text-danger #{error.errors['address.district'].message}
+							label(for="district") Locality:
+							input(name="district" value=(customer===undefined ? "" : customer.address.district) class="form-control")
+						else
+							label(for="district") Locality:
+							input(name="district" value=(customer===undefined ? "" : customer.address.district) class="form-control")
+	 
+
+					else
+						label(for="district") Locality:
+						input(name="district" value=(customer===undefined ? "" : customer.address.district) class="form-control")
+				br
+				div
+					if error
+						if(error.errors['address.PIN'])
+							p.text-danger #{error.errors['address.PIN'].message}
+							label(for="PIN") PIN:
+							input(name="PIN" value=(customer===undefined ? "" : customer.address.PIN) class="form-control")
+						else
+							label(for="PIN") PIN:
+							input(name="PIN" value=(customer===undefined ? "" : customer.address.PIN) class="form-control")
+	 
+
+					else
+						label(for="PIN") PIN:
+						input(name="PIN" value=(customer===undefined ? "" : customer.address.PIN) class="form-control")
+				br
+			br
+			div
+				if error
+					if(error.errors.phone)
+						p.text-danger #{error.errors.phone.message}
+						label(for="phone") phone:
+						input(name="phone" value=(customer===undefined ? "" : customer.phone) class="form-control")
+					else
+
+						label(for="phone") phone:
+						input(name="phone" value=(customer===undefined ? "" : customer.phone) class="form-control")
+
+
+				else
+					label(for="phone") phone:
+					input(name="phone" value=(customer===undefined ? "" : customer.phone) class="form-control")
+			br
+			div
+				button(type="Submit" class="btn btn-warning btn-lg") Add new Customer
+			
+

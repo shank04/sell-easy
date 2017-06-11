@@ -1,0 +1,19 @@
+extends ./index
+
+block title
+	title Customer Detail
+	
+	
+block content
+	
+
+	h2 Details of #{customer.name} :
+	h4 Address :
+	p House No. : #{customer.address.houseNo}
+
+	p Street No. : #{customer.address.street}
+	p Locality : #{customer.address.district}
+	p PIN : #{customer.address.PIN}
+	h5 Phone No. :  #{customer.phone}
+
+

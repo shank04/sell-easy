@@ -1,0 +1,19 @@
+extends ./unindex
+block title
+	title Login
+block content
+	h2 Log In
+	br
+	form(action="", method="POST")
+		if message.length
+			p(class="alert alert-danger") #{message}
+		
+		label(for="username") User Name :
+		input(type="text" name="username" class="form-control" required)
+		br
+		
+		label(for="password") Password : 
+		input(type="password" name="password" class="form-control" required)
+		br
+
+		button(type="Submit" class="btn btn-warning btn-lg") SignUp

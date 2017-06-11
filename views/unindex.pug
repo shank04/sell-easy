@@ -1,0 +1,64 @@
+doctype html
+html(lang='en')
+  head
+    meta(http-equiv='content-type', content='text/html; charset=UTF-8')
+    meta(charset='utf-8')
+    block title
+      title Home
+    
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/styles.css', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Satisfy', rel='stylesheet')
+
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation' style="height:60px;")
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='').
+            #[h2.nav.navbar-nav.navbar-right(style="font-family:satisfy; padding-left:105px;") Sell-Eazy]
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='/') Home
+            li
+              
+              a(href='/login') Sign in
+            li
+              a(href='/signup') Register your shop
+            
+          
+    .container-fluid
+      .row.row-offcanvas.row-offcanvas-left
+                   
+        // span
+        .col-sm-9.col-md-10.col-lg-offset-1.main
+        
+          block content
+            
+            h1(style="font-family:Tahoma;") About
+            div.panel.panel-default
+              div.panel-body(style="font-size:20px; font-family:Tahoma;").
+                Sell-Eazy is a web application intended to make the shop management by retailers hassle free. It allows them to keep a record of the products they sell, keep a record of the customers who have ever made a purchase from their shop and also allows them to generate bills for each purchase made from their shop and also stores it for future references.
+            br
+            h1(style="font-family:Tahoma;") How it works ?
+            div.panel.panel-default
+              div.panel-body(style="font-size:20px; font-family:Tahoma;").
+                #[p It is quite simple.]
+                #[strong Register your shop with us.]
+                Then, start by adding categories of products you have, followed by the brands of different categories you sell along with their price.That's it.
+                Now, you just have to add customer details as they arrive and generate bills for thier purchases.
+                #[strong Happy Selling !]
+    br
+    br      
+    footer
+      p.text-center(style="background-color:#f5f5f5;") Made by Shashank with &hearts;
+    // script references
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
+    script(src='js/bootstrap.min.js')
+    script(src='js/scripts.js')

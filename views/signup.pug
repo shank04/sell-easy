@@ -1,0 +1,26 @@
+extends ./unindex
+block title
+	title SignUp
+block content
+	h2 Sign Up 
+	form(action="", method="POST")
+		if message.length
+			p(class="alert alert-danger") #{message}
+		div(class="form-group")
+			label(for="shopname") Shop Name :
+			input(type="text" name="shopname" class="form-control" required)
+		div(class="form-group")
+			label(for="username") User Name :
+			input(type="text" name="username" class="form-control" required)
+		div(class="form-group")
+			label(for="email") Email :
+			input(type="email" name="email" class="form-control" required)
+		div(class="form-group")
+			label(for="password") Password : 
+			input(type="password" name="password" class="form-control" required)
+		div(class="form-group")
+			label(for="confirmpassword") Confirm Password : 
+			input(type="password" name="confirmpassword" class="form-control" required)
+
+
+		button(type="Submit" class="btn btn-warning btn-lg") SignUp

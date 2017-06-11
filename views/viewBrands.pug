@@ -1,0 +1,15 @@
+extends ./index
+block title
+	title Brands
+	
+
+block content
+	if items.length==0
+		p.text-danger All brands under #{categ.name} will be listed here. You have not added any brand yet.
+
+	
+	h2 Brands of #{categ.name} :
+	for i in items
+		p Brand : #{i.brand} &nbsp;&nbsp; price : Rs. #{i.price}
+		br
+

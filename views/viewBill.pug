@@ -1,0 +1,28 @@
+
+block title
+	title Bill
+	meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/styles.css', rel='stylesheet')
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
+    script(src='js/bootstrap.min.js')
+    script(src='js/scripts.js')
+
+
+	
+
+block content
+	h4 Customer Name : #{bill.customer.name} :
+	p Generated at : #{bill.generated_at}
+	h4 Purchase Details :
+	-for (var i=0;i<bill.cost.length;i++){
+		p. 
+			Category : #{bill.category[i].name} &nbsp; &nbsp; &nbsp;
+			Brand : #{bill.items[i].brand} &nbsp; &nbsp; &nbsp;
+			price : #{bill.items[i].price} &nbsp; &nbsp; &nbsp;
+			quantity : #{bill.quantity[i]} &nbsp; &nbsp; &nbsp;
+			Cost : #{bill.cost[i]}
+			#[hr]
+		
+	-}
+	h6 Bill Amount : #{bill.amount}

@@ -1,0 +1,13 @@
+extends ./index
+block title
+	title Categories
+	
+block content
+	if categs.length==0
+		p.text-danger All categories of products will be listed here. You have not added any category yet.
+
+	
+	h2 Categories of Products :
+	for c in categs
+		a(href='/viewBrands/'+c._id) #{c.name} 
+		br

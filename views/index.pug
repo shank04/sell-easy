@@ -1,0 +1,91 @@
+doctype html
+html(lang='en')
+  head
+    meta(http-equiv='content-type', content='text/html; charset=UTF-8')
+    meta(charset='utf-8')
+    block title
+      title Home
+    
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/styles.css', rel='stylesheet')
+    
+    link(href='https://fonts.googleapis.com/css?family=Satisfy', rel='stylesheet')
+
+
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation' style="height:60px;")
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='').
+            #[h2.nav.navbar-nav.navbar-right(style="font-family:satisfy; padding-left:105px;") Sell-Eazy]
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='/') Home
+            li
+              a(href='') Welcome #{user.username} !
+
+            li
+              a(href='/logout') Sign out
+            
+          
+    .container-fluid
+      .row.row-offcanvas.row-offcanvas-left
+        #sidebar.col-sm-3.col-md-2.sidebar-offcanvas(role='navigation')
+          br
+          ul.nav.nav-sidebar
+            li
+              a(href='/addCategory') Add Product Categories
+            li
+              a(href='/addItem') Add Products
+            li
+              a(href='/addCustomer') Add new Customer
+          ul.nav.nav-sidebar
+            li
+              a(href='/billing') Generate Bill
+            li
+              a(href='/viewCategory') View Product Categories
+            li
+              a(href='/viewCustomers') View Customers
+            
+        // span
+        .col-sm-9.col-md-10.col-lg-8.main
+          h1.text-center #{user.shopname}
+
+          block content
+            if bills.length==0
+              p.text-danger All bills will be listed here. You have not generated any bill yet.
+            h2.sub-header Bills Generated :
+            .table-responsive
+              table.table.table-striped
+                thead
+                  tr
+                    
+                    th Customer Name
+                    th Bill Amount
+                    th View
+                    
+                tbody
+                for bill in bills
+                  tr
+                    
+                    td #{bill.customer.name}
+                    td #{bill.amount}
+                    td
+                      a(href=bill.url) view bill
+                    
+
+    br
+    br         
+    footer
+      p.text-center(style="background-color:#f5f5f5;") Made by Shashank with &hearts;
+    // script references
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
+    script(src='js/bootstrap.min.js')
+    script(src='js/scripts.js')

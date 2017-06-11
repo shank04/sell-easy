@@ -1,0 +1,363 @@
+extends ./index
+block title
+	title Generate Bill
+block content
+	
+	h2 Generate Bill
+	form(action="", method="POST", id="form")
+		div
+			if error
+				if(error.errors.customer)
+					p.text-danger #{error.errors.customer.message}
+					label(for="customer") Select customer :
+					select(type="select", name="customer" class="form-control")
+						option(value disabled selected) 
+						for c in customers
+							option(value=c._id) #{c.name}
+				else
+					label(for="customer") Select customer :
+					select(type="select", name="customer" class="form-control")
+						 
+						for c in customers
+							option(value=c._id, selected=(c._id.toString()==bill.customer ? 'selected' : false)) #{c.name} 
+
+			else
+				label(for="customer") Select customer :					
+				select(type="select", name="customer" class="form-control")
+					option(value disabled selected) 
+					for c in customers
+						option(value=c._id) #{c.name}
+		br
+		div(id="selectcategory0")
+			if error
+				if(error.errors.category)
+					p.text-danger #{error.errors.category.message}
+					label(for="category") Select Category :
+					select(type="select", name="category" class="form-control")
+						option(value disabled selected) 
+						for c in categs
+							option(value=c._id) #{c.name}
+				else
+					label(for="category") Select Category :
+					select(type="select", name="category" class="form-control")
+						 
+						for c in categs
+							option(value=c._id, selected=(c._id.toString()==bill.category ? 'selected' : false)) #{c.name} 
+
+			else
+				label(for="category") Select Category :					
+				select(type="select", name="category", class="clist", onChange="dynamic()" class="form-control")
+					option(value disabled selected) 
+					for c in categs
+						option(value=c._id) #{c.name}
+		br
+
+		
+
+		div(id="selectitem0")
+
+
+		div(id="quantity0")
+		
+		div(id="noitem0")
+
+		div(id="price0")
+
+		div(id="ask0")
+
+
+		div(id="selectcategory1")
+
+		div(id="selectitem1")
+
+		div(id="quantity1")
+		
+		div(id="noitem1")
+
+		div(id="price1")
+
+		div(id="ask1")
+
+
+		div(id="selectcategory2")
+
+		div(id="selectitem2")
+
+		div(id="quantity2")
+		
+		div(id="noitem2")
+
+		div(id="price2")
+
+		div(id="ask2")
+
+		div(id="total")
+
+		div(id="eachcost")
+
+
+		div(id="iquantity")
+			
+
+
+
+		
+		div
+			input(type="hidden" name="amount" id="totalcost")
+			
+		
+		
+		div
+			button(type="Submit"  class="btn btn-warning btn-lg") Save Bill
+
+
+	script.
+		
+		var a=!{JSON.stringify(items)} ;
+		var c=!{JSON.stringify(categs)} ;
+		console.log(c[0].name);
+		sum=0;
+		count=0;
+		selectcategory_array=["selectcategory0","selectcategory1","selectcategory2"];
+		selectitem_array=["selectitem0","selectitem1","selectitem2"];
+		quantity_array=["quantity0","quantity1","quantity2"];
+		price_array=["price0","price1","price2"];
+		noitem_array=["noitem0","noitem1","noitem2"];
+		label=[];
+		label2=[];
+		selectlist=[];
+		selectquantity=[];
+		labelid_array=["l0","l1","l2"];
+		label2id_array=["l20","l21","l22"];
+		selectlistid_array=["sl0","sl1","sl2"];
+		qlistid_array=["ql0","ql1","ql2"];
+		pricemsgid_array=["mp0","mp1","mp2"];
+		nomsgid_array=["mn0","mn1","mn2"];
+		ask_array=["ask0","ask1","ask2"];
+		askid_array=["askid0","askid1","askid2"];
+		calculatedprice_array=[];
+		calculatedquantity_array=[];
+		calculatedcost_array=[];
+
+		function dynamic(){
+			x=0;
+			
+			br=document.createElement("br");
+			selectitems=document.getElementById(selectitem_array[count]);
+			noitem=document.getElementById(noitem_array[count]);
+			list=document.getElementById(selectlistid_array[count]);
+			labelid=document.getElementById(labelid_array[count]);
+			quantity=document.getElementById(quantity_array[count]);
+
+			qlist=document.getElementById(qlistid_array[count]);
+			label2id=document.getElementById(label2id_array[count]);
+
+			msg=document.getElementById(nomsgid_array[count]);
+			if(msg){
+			msg.parentNode.removeChild(msg);
+			}
+
+			if(list){
+			list.parentNode.removeChild(list);
+			labelid.parentNode.removeChild(labelid);
+			qlist.parentNode.removeChild(qlist);
+			label2id.parentNode.removeChild(label2id);
+			}
+
+			label[count]=document.createElement("label");
+			label[count].id=labelid_array[count];
+			text=document.createTextNode("Select brand : ");
+			label[count].appendChild(text);
+			selectitems.appendChild(label[count]);
+			selectlist[count]=document.createElement("select");
+			selectlist[count].type="select";
+
+			selectlist[count].id=selectlistid_array[count];
+			selectlist[count].name="items";
+			selectlist[count].class="form-control";
+
+			
+			selectitems.appendChild(selectlist[count]);
+			//- selectitems.appendChild(br);
+			label2[count]=document.createElement("label");
+			label2[count].id=label2id_array[count];
+			text2=document.createTextNode("No. of items : ");
+			label2[count].appendChild(text2);
+			quantity.appendChild(label2[count]);
+
+			selectquantity[count]=document.createElement("select");
+			selectquantity[count].type="select";
+
+			selectquantity[count].id=qlistid_array[count];
+
+			selectquantity[count].class="form-control";
+
+
+			
+			selectquantity[count].onchange=function(){calculate();};
+
+			quantity.appendChild(selectquantity[count]);
+			//- quantity.appendChild(br);
+			//- quantity.appendChild(br);
+			option=document.createElement("option");
+			option.selected=true;
+			option.disabled=true;
+			selectquantity[count].appendChild(option);
+
+
+			for(i=1;i<=5;i++){
+			option=document.createElement("option");
+			option.value=i;
+			option.text=i;
+			selectquantity[count].appendChild(option);
+			}
+
+			clist=document.getElementsByClassName("clist");
+			option=document.createElement("option");
+			option.selected=true;
+			option.disabled=true;
+			selectlist[count].appendChild(option);
+
+			console.log(clist[count].value);
+			for(i=0;i<a.length;i++){
+			if(a[i].category==clist[count].value){
+			x=1;
+			console.log(a[i].brand);
+			console.log(i);
+			option=document.createElement("option");
+			option.value=a[i]._id;
+			option.text=a[i].brand;
+			selectlist[count].appendChild(option);
+			}
+
+			}
+
+		if(x==0){
+			list=document.getElementById(selectlistid_array[count]);
+			list.parentNode.removeChild(list);
+			label=document.getElementById(labelid_array[count]);
+			label.parentNode.removeChild(label);
+			qlist=document.getElementById(qlistid_array[count]);
+			labelid=document.getElementById(label2id_array[count]);
+
+			qlist.parentNode.removeChild(qlist);
+			labelid.parentNode.removeChild(labelid);
+			p=document.createElement("p");
+			p.id=nomsgid_array[count];
+			noitem.appendChild(p);
+			msgtext=document.createTextNode("There are no items in this category");
+			p.appendChild(msgtext);
+			calculate();
+
+		}
+
+		}
+
+		function calculate(){
+			if(x==1){
+			list=document.getElementById(selectlistid_array[count]).value;
+			qlist=document.getElementById(qlistid_array[count]).value;
+			cost=document.getElementById("cost");
+			totalcost=document.getElementById("totalcost");
+			iquantity=document.getElementById("iquantity");
+
+
+			msg=document.getElementById(nomsgid_array[count]);
+			msg2=document.getElementById(pricemsgid_array[count]);
+			askid=document.getElementById(askid_array[count]);
+
+			if(askid){
+				//- msg.parentNode.removeChild(msg);
+				msg2.parentNode.removeChild(msg2);
+				askid.parentNode.removeChild(askid);
+			}
+
+			price=document.getElementById(price_array[count]);
+			p1=document.createElement("p");
+			p1.id=pricemsgid_array[count];
+			price.appendChild(p1);
+			}
+
+			for(i=0;i<a.length;i++){
+			if(a[i]._id==list){
+				calculatedprice_array[count]=a[i].price;
+				calculatedquantity_array[count]=qlist;
+				p1text=document.createTextNode("Price : "+a[i].price);
+				p1.appendChild(p1text);
+				calculatedcost_array[count]=String(a[i].price*qlist);
+				
+			}
+			}
+			
+			ask=document.getElementById(ask_array[count]);
+			ques=document.createElement("p");
+			ques.id=askid_array[count];
+			ask.appendChild(ques);
+			questext=document.createTextNode("Do you want to add more items ?");
+			ques.appendChild(questext);
+			b1=document.createElement("input");
+			b1.type="button";
+			b1.value="Yes";
+			b1.id="yes";
+			b1.class="btn-success";
+			b1.onclick=function(){repeat();};
+			ques.appendChild(b1);
+			b2=document.createElement("input");
+			b2.type="button";
+			b2.value="No";
+			b2.id="no";
+			b2.class="btn-warning";
+			b2.onclick=function(){stop();};
+			ques.appendChild(b2);
+
+			
+
+		}
+
+		function repeat(){
+			ask.parentNode.removeChild(ask);
+			count++;
+			main=document.getElementById("selectcategory0");
+			re=document.getElementById(selectcategory_array[count]);
+			re.innerHTML=main.innerHTML;
+		}
+
+		function stop(){
+			ask.parentNode.removeChild(ask);
+			iquantity=document.getElementById("iquantity");
+			eachcost=document.getElementById("eachcost");
+			console.log(calculatedcost_array);
+			console.log(calculatedquantity_array);
+
+			for(i=0;i<calculatedquantity_array.length;i++){
+				quantityinput=document.createElement("input");
+				quantityinput.type="hidden";
+				quantityinput.name="quantity";
+				quantityinput.value=calculatedquantity_array[i];
+				iquantity.appendChild(quantityinput);
+			}
+
+			for(i=0;i<calculatedcost_array.length;i++){
+				costinput=document.createElement("input");
+				costinput.type="hidden";
+				costinput.name="cost";
+				costinput.value=calculatedcost_array[i];
+				eachcost.appendChild(costinput);
+			}
+
+
+
+			for(i=0;i<calculatedprice_array.length;i++){
+				sum+=parseInt(calculatedcost_array[i]);
+			}
+
+			total=document.getElementById("total");
+			p2=document.createElement("p");
+			p2text=document.createTextNode("Amount Payable : "+sum);
+			p2.appendChild(p2text);
+			total.appendChild(p2);
+			totalcost.value=(sum);
+
+		}
+		
+

@@ -1,0 +1,18 @@
+html
+	head
+		title CreateCategory
+	body
+		h2 Create Category
+		form(action="", method="POST")
+			div
+				if error
+					p #{error.errors.name.message}
+					label(for="name") Name:
+					input(name="name" value=category.name)
+					
+				else
+					label(for="name") Name:
+					input(name="name")
+			br
+			div
+				button(type="Submit") Create new Category

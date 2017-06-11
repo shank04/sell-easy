@@ -1,0 +1,70 @@
+extends ./index
+block title
+	title Add Items
+block content
+	div(class="s-12 l-6")
+		h2 Add Item
+		form(action="", method="POST")
+			div
+				if error
+					if(error.errors.category)
+						p.text-danger #{error.errors.category.message}
+						label(for="category") Select Category :
+						select(type="select", name="category" class="form-control")
+							option(value disabled selected) 
+							for c in categs
+								option(value=c._id) #{c.name}
+					else
+						label(for="category") Select Category :
+						select(type="select", name="category" class="form-control")
+							 
+							for c in categs
+								option(value=c._id, selected=(c._id.toString()==item._id ? 'selected' : false)) #{c.name} 
+
+				else
+					label(for="category") Select Category :					
+					select(type="select", name="category"  class="form-control")
+						option(value disabled selected) 
+						for c in categs
+							option(value=c._id) #{c.name}
+			br
+			div
+				if error
+					if(error.errors.brand)
+						p.text-danger #{error.errors.brand.message}
+						label(for="brand") Brand :
+						input(name="brand" class="form-control")
+						
+					else
+
+						label(for="brand") Brand :
+						input(name="brand",value=item.brand  class="form-control")
+
+
+				else
+					label(for="brand") Brand :
+					input(name="brand"  class="form-control")
+			br
+
+			div
+				if error
+					if(error.errors.price)
+						p.text-danger #{error.errors.price.message}
+						label(for="price") Price :
+						input(name="price"  class="form-control")
+						
+					else
+
+						label(for="price") Price :
+						input(name="price",value=item.price  class="form-control")
+
+
+				else
+					label(for="price") Price :
+					input(name="price" class="form-control")
+			br
+			
+			div
+				button(type="Submit" class="btn btn-warning btn-lg") Create new Item
+			
+
