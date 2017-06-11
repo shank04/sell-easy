@@ -1,12 +1,12 @@
-
+extends ./index
 block title
 	title Bill
 	meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
-    link(href='css/bootstrap.min.css', rel='stylesheet')
-    link(href='css/styles.css', rel='stylesheet')
-    script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
-    script(src='js/bootstrap.min.js')
-    script(src='js/scripts.js')
+	link(href='css/bootstrap.min.css', rel='stylesheet')
+	link(href='css/styles.css', rel='stylesheet')
+	script(src='//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js')
+	script(src='js/bootstrap.min.js')
+	script(src='js/scripts.js')
 
 
 	
@@ -25,4 +25,5 @@ block content
 			#[hr]
 		
 	-}
-	h6 Bill Amount : #{bill.amount}
+	h4 Bill Amount : #{bill.amount}
+
