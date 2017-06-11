@@ -31,7 +31,7 @@ app.use(flash());
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://127.0.0.1:27017/new9_db');
+mongoose.connect("mongodb://shank:databasepassword@ds119772.mlab.com:19772/sell-easy");
 
 var db = mongoose.connection;
 db.on('error',console.error.bind(console,'connection error'));
