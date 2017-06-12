@@ -14,7 +14,7 @@ html(lang='en')
 
 
   body
-    nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation' style="height:60px;")
+    nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
       .container-fluid
         .navbar-header
           button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
@@ -22,8 +22,8 @@ html(lang='en')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='').
-            #[h2.nav.navbar-nav.navbar-right(style="font-family:satisfy; padding-left:105px;") Sell-Eazy]
+          a.navbar-brand(style="font-family:satisfy; font-size:35px;") Sell-Eazy
+            
         .navbar-collapse.collapse
           ul.nav.navbar-nav.navbar-right
             li
@@ -53,7 +53,12 @@ html(lang='en')
               a(href='/viewCategory') View Product Categories
             li
               a(href='/viewCustomers') View Customers
-            
+        .col-sm-9.col-md-10.main
+          // toggle sidebar button
+          p.visible-xs
+            button.btn.btn-primary.btn-xs(type='button', data-toggle='offcanvas')
+              i.glyphicon.glyphicon-chevron-left
+    
         // span
         .col-sm-9.col-md-10.col-lg-8.main
           h1.text-center #{user.shopname}
